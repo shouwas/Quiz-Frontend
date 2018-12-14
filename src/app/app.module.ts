@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from './app.service';
+
 
 
 
@@ -16,11 +19,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent, QuestionComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule,
+    BrowserModule, HttpClientModule, BrowserAnimationsModule,
      MatButtonModule, MatCheckboxModule,
      MatCardModule,MatInputModule,FormsModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
