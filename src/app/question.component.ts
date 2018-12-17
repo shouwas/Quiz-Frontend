@@ -7,11 +7,14 @@ import { ApiService } from './app.service';
     styleUrls: ['./question.component.css']
   })
   export class QuestionComponent {
-    title = 'Quiz-Question!';
 
     question = {};
 
     constructor(private api: ApiService){}
+
+    ngOnInit(){
+      this.api.questionSelected.subscribe(question => this.question = question)
+  }
    
       post(question)
       {
