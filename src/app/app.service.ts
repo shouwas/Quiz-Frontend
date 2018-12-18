@@ -6,32 +6,58 @@ import { Subject } from "rxjs";
 @Injectable()
 export class ApiService {
 
-    private  selectedQuestion = new Subject<any>();
+    private selectedQuestion = new Subject<any>();
     questionSelected = this.selectedQuestion.asObservable();
 
-    constructor(private http: HttpClient) {}
+    private selectedQuiz = new Subject<any>();
+    quizSelected = this.selectedQuiz.asObservable();
 
-    getQuestions(){
-        return this.http.get('https://localhost:44300/api/questions');
+    constructor(private http: HttpClient) { }
+
+    getQuestions(quizId) {
+        return this.http.get(`https://localhost:44300/api/questions/${quizId}`);
     }
 
-    postQuestion(question){
+    getQuizzes() {
+        return this.http.get('https://localhost:44300/api/quizzes');
+
+    }
+
+    postQuestion(question) {
         this.http.post('https://localhost:44300/api/questions', question).subscribe(res => {
             console.log(res)
         });
     }
 
-    putQuestion(question){
+    putQuestion(question) {
         this.http.put(`https://localhost:44300/api/questions/${question.id}`, question).subscribe(res => {
             console.log(res)
         });
     }
 
-        selectQuestion(question){
-            this.selectedQuestion.next(question)
+
+    postQuiz(quiz) {
+        this.http.post('https://localhost:44300/api/quizzes', quiz).subscribe(res => {
+            console.log(res)
+        });
+    }
+
+    putQuiz(quiz) {
+        this.http.put(`https://localhost:44300/api/quizzes/${quiz.id}`, quiz).subscribe(res => {
+            console.log(res)
+        });
+    }
+
+    selectQuestion(question) {
+        this.selectedQuestion.next(question)
+
+    }
+
+    selectQuiz(quiz) {
+        this.selectedQuiz.next(quiz)
 
     }
 
 
-    
+
 }
